@@ -43,9 +43,9 @@ chmod +x frida-server
 ```bash
 setprop persist.device_config.runtime_native.usap_pool_enabled false
 ./frida-server
-```bash
-7. If you are using magiskhide on your phone
 ```
+7. If you are using magiskhide on your phone
+```bash
 magiskhide disable
 ```
 
