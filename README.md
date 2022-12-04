@@ -1,68 +1,38 @@
 Code to access the firewalla API & tools for reverse engineering Firewalla
 
-Better documentation & steps coming later.
+# Definitions
+**My Firewalla API**: https://my.firewalla.com A user friendly way to access your firewalla box through the browser
 
+**Internal Box API**: An API inside your firewalla box, accessable both through a public endpoint (https://firewalla.encipher.io) and a local endpoint (http://{box_ip}:8833). This API is used mostly in the app. 
 
-# Files
-## src/
-Files to start using the firewalla API
+**Fireguard token**: A type of authorization token to access the My Firewalla API
 
-## tools/firewalla-frida.js
-[Frida](https://github.com/frida/frida) script to get the master token.
-This token is required to generate a fireguard token
-### Requirements
-Rooted android phone
+**ETP token**: A type of authorization token to access the internal API of your box. This token is linked to an email and public/private keypair
 
-### Install frida on host
-```bash
-pip install frida-tools
-pip install frida
-frida-ls-devices
-```
+# Tools in this repository
+## tools/create-etp-token
+Create an ETP token by adding an additional device
 
-### Install frida on android
-1. Get your phone cpu architecture
-```bash
-adb shell getprop ro.product.cpu.abi
-```
-2. Download the correct frida-server-xx.x.x-android-xxx.xz file from [here](https://github.com/frida/frida/releases)
-3. Extract the .xz and rename the file to `frida-server`
-4. Push the binary to your phone & enter adb shell
-```bash
-adb push frida-server /data/local/tmp
-adb shell
-```
-5. On your phone's shell execute
-```bash
-su
-cd /data/local/tmp
-chmod +x frida-server
-./frida-server
-```
-6. If you get the error: VM::AttachCurrentThread failed: -1:
-```bash
-setprop persist.device_config.runtime_native.usap_pool_enabled false
-./frida-server
-```
-7. If you are using magiskhide on your phone
-```bash
-magiskhide disable
-```
+This is the recommended way of getting a token to access an API.
 
-### Run the script
-Get your device ID using
-```bash
-adb devices
-```
-Make sure you have the firewalla app installed.
-Then execute the frida script using
-```bash
-frida -D <device_id> -l tools/firewalla-frida.js -f com.firewalla.chancellor
-```
-Type `%resume` in the frida console, and you should be able to get the MASTER_TOKEN from an Authorization Bearer header.
+## tools/create-fireguard-token
+Create a fireguard token from an ETP token, valid for 300 days.
 
-## tools/create-token.js
-This scripts create a fireguard token valid for 300 days.
-Requires environment variables (.env):
-- FIREWALLA_GID: The UUID of your Firewalla box, found in the App -> Settings -> About -> GID
-- MASTER_TOKEN: Obtained using `tools/firewalla-frida.js`
+In the app, firewalla creates a fireguard token using the qr code of the My Firewalla API
+This token is usually valid for only 3 hours.
+
+You can use this tool if you only want a token to access the My Firewalla API
+
+## tools/app-frida-tools
+Documentation & tools to reverse engineer the Firewalla app.
+
+# API implementations in this repository
+## my-firewalla
+Requires a fireguard token.
+
+Code to easily access the My Firewalla API
+
+## src
+Requires an ETP token.
+
+Code to easily access both the Internal Box API and My Firewalla API.

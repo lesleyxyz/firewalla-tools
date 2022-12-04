@@ -16,6 +16,6 @@
       "useUnknownInCatchVariables": true
     },
     "include": [
-      "./src/**/*"
+      "my-firewalla/**/*"
     ]
 }
