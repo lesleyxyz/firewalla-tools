@@ -1,4 +1,5 @@
 Code to access the firewalla API & tools for reverse engineering Firewalla
+If you want to use the firewalla API in your node project, checkout [node-firewalla](https://github.com/lesleyxyz/node-firewalla/)
 
 # Definitions
 **My Firewalla API**: https://my.firewalla.com A user friendly way to access your firewalla box through the browser
@@ -10,12 +11,18 @@ Code to access the firewalla API & tools for reverse engineering Firewalla
 **ETP token**: A type of authorization token to access the internal API of your box. This token is linked to an email and public/private keypair
 
 # Tools in this repository
-## tools/create-etp-token
+## create-etp-token
+```bash
+node create-etp-token
+```
 Create an ETP token by adding an additional device
 
 This is the recommended way of getting a token to access an API.
 
-## tools/create-fireguard-token
+## create-fireguard-token
+```bash
+node create-fireguard-token
+```
 Create a fireguard token from an ETP token, valid for 300 days.
 
 In the app, firewalla creates a fireguard token using the qr code of the My Firewalla API
@@ -23,16 +30,5 @@ This token is usually valid for only 3 hours.
 
 You can use this tool if you only want a token to access the My Firewalla API
 
-## tools/app-frida-tools
+## app-frida-tools
 Documentation & tools to reverse engineer the Firewalla app.
-
-# API implementations in this repository
-## my-firewalla
-Requires a fireguard token.
-
-Code to easily access the My Firewalla API
-
-## src
-Requires an ETP token.
-
-Code to easily access both the Internal Box API and My Firewalla API.
