@@ -1,4 +1,4 @@
-import {SecureUtil, FWPingMessage, FWGroup, FWGroupApi} from 'node-firewalla'
+import { SecureUtil, FWPingMessage, FWGroup, FWGroupApi } from 'node-firewalla'
 import validator from 'validator';
 import inquirer from 'inquirer';
 import fs from 'fs';
@@ -20,13 +20,13 @@ import { exit } from 'process';
 	await FWGroupApi.joinGroup(JSON.parse(qr), email)
 
 	let fwGroup = FWGroup.fromJson(response.groups[0], localIp)
-	let pingResult = await FWGroupApi.sendMessageBox(fwGroup, true, new FWPingMessage())
 
-	if(pingResult.code == 200){
+	try {
+		await FWGroupApi.sendMessageToBox(fwGroup, true, new FWPingMessage())
 		console.log("Successfully linked to box! Your token:")
 		console.log(response.access_token)
-	}else{
-		console.error("An error occured linking your ETP token to your box")
+	}catch(err){
+		console.error("An error occured linking your ETP token to your box", err)
 	}
 })()
 
