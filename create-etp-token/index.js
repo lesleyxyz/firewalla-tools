@@ -22,7 +22,7 @@ import { exit } from 'process';
 	let fwGroup = FWGroup.fromJson(response.groups[0], localIp)
 
 	try {
-		await FWGroupApi.sendMessageToBox(fwGroup, true, new FWPingMessage())
+		await FWGroupApi.sendMessageToBox(fwGroup, new FWPingMessage(), true)
 		console.log("Successfully linked to box! Your token:")
 		console.log(response.access_token)
 	}catch(err){
