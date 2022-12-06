@@ -1,4 +1,4 @@
-import { SecureUtil, FWPingMessage, FWGroup, FWGroupApi } from 'node-firewalla'
+import { SecureUtil, FWGroup, FWGroupApi, NetworkService } from 'node-firewalla'
 import validator from 'validator';
 import inquirer from 'inquirer';
 import fs from 'fs';
@@ -10,7 +10,7 @@ import { exit } from 'process';
 
 	if(!createNewKeyPair){
 		let {publicKey, privateKey} = await promptKeyPair()
-		SecureUtil.importKeyPair(publicKey, privateKey)
+		SecureUtil.importKeyPairFromString(publicKey, privateKey)
 	}else{
 		SecureUtil.regenerateKeyPair()
 		writeKeyPair()
@@ -22,7 +22,9 @@ import { exit } from 'process';
 	let fwGroup = FWGroup.fromJson(response.groups[0], localIp)
 
 	try {
-		await FWGroupApi.sendMessageToBox(fwGroup, new FWPingMessage(), true)
+		let nwService = new NetworkService(fwGroup)
+		await nwService.ping()
+
 		console.log("Successfully linked to box! Your token:")
 		console.log(response.access_token)
 	}catch(err){
