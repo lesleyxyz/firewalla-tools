@@ -17,12 +17,21 @@ If you like my work, give this repository a `⭐` or consider [Buying Me A Coffe
 # Tools in this repository
 ## create-etp-token
 ```bash
-npm install
 node create-etp-token
 ```
 Create an ETP token by adding an additional device
-
 This is the recommended way of getting a token to access an API.
+
+### How to use
+1) Install the required modules using `npm install`.
+2) Make sure you are on the same network as your firewalla & find out its IP
+3) `node create-etp-token`
+4) Input an email to create your ETP token. Your email will only be used to display in the app.
+5) Go to Your Firewalla App -> Select your box -> Settings -> Advanced -> Allow Additional Pairing -> Turn on Additional Pairing
+6) Scan or screenshot the QR code and find copy its JSON value. Then input it in the program
+7) Enter the IP address of your box
+8) Create a new key pair: Yes (or no if you want to generate or reuse your own)
+9) Done! Now you will only need the `etp.private.pem` & `etp.public.pem` files to use with [node-scraper](https://github.com/lesleyxyz/node-scraper)
 
 ## create-fireguard-token
 ```bash

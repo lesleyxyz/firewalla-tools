@@ -13,20 +13,18 @@ import { exit } from 'process';
 		SecureUtil.importKeyPairFromString(publicKey, privateKey)
 	}else{
 		SecureUtil.regenerateKeyPair()
-		writeKeyPair()
 	}
 
-	let response = await FWGroupApi.login(email)
-	await FWGroupApi.joinGroup(JSON.parse(qr), email)
-
-	let fwGroup = FWGroup.fromJson(response.groups[0], localIp)
-
 	try {
+		let fwGroup = await FWGroupApi.joinGroup(JSON.parse(qr), email, localIp)
 		let nwService = new NetworkService(fwGroup)
 		await nwService.ping()
 
-		console.log("Successfully linked to box! Your token:")
-		console.log(response.access_token)
+		console.log("Successfully linked to box! You can now use your public & private key to authenticate with your FIrewalla Box!")
+		
+		if(createNewKeyPair){
+			writeKeyPair()
+		}
 	}catch(err){
 		console.error("An error occured linking your ETP token to your box", err)
 	}
