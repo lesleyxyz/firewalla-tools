@@ -1,5 +1,9 @@
+# Firewalla tools
+
 Code to access the firewalla API & tools for reverse engineering Firewalla
 If you want to use the firewalla API in your node project, checkout [node-firewalla](https://github.com/lesleyxyz/node-firewalla/)
+
+If you like my work, give this reposiitory a `⭐` or [Buy Me A Coffee ☕](https://www.buymeacoffee.com/lesleyxyz)
 
 # Definitions
 **My Firewalla API**: https://my.firewalla.com A user friendly way to access your firewalla box through the browser
@@ -13,6 +17,7 @@ If you want to use the firewalla API in your node project, checkout [node-firewa
 # Tools in this repository
 ## create-etp-token
 ```bash
+npm install
 node create-etp-token
 ```
 Create an ETP token by adding an additional device
@@ -21,6 +26,7 @@ This is the recommended way of getting a token to access an API.
 
 ## create-fireguard-token
 ```bash
+npm install
 node create-fireguard-token
 ```
 Create a fireguard token from an ETP token, valid for 300 days.
