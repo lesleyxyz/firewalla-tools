@@ -20,7 +20,10 @@ import { exit } from 'process';
 		let nwService = new NetworkService(fwGroup)
 		await nwService.ping()
 
-		console.log("Successfully linked to box! You can now use your public & private key to authenticate with your FIrewalla Box!")
+		let {access_token} = await FWGroupApi.login(email)
+		console.log("Successfully linked to box! You can now use your public & private key to authenticate with your Firewalla Box!")
+		console.log("You can use this ETP_TOKEN for create-fireguard-token:")
+		console.log(access_token)
 		
 		if(createNewKeyPair){
 			writeKeyPair()
