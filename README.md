@@ -31,7 +31,7 @@ This is the recommended way of getting a token to access an API.
 6) Scan or screenshot the QR code and find copy its JSON value. Then input it in the program
 7) Enter the IP address of your box
 8) Create a new key pair: Yes (or no if you want to generate or reuse your own)
-9) Done! Now you will only need the `etp.private.pem` & `etp.public.pem` files to use with [node-scraper](https://github.com/lesleyxyz/node-scraper)
+9) Done! Now you will only need the `etp.private.pem` & `etp.public.pem` files to use with [node-firewalla](https://github.com/lesleyxyz/node-firewalla)
 10) An ETP_TOKEN will also be printed out if you want to use it with `create-fireguard-token`
 
 ## create-fireguard-token
