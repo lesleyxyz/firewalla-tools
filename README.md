@@ -3,7 +3,7 @@
 Code to access the firewalla API & tools for reverse engineering Firewalla
 If you want to use the firewalla API in your node project, checkout [node-firewalla](https://github.com/lesleyxyz/node-firewalla/)
 
-If you like my work, give this repository a `⭐` or consider [Buying Me A Coffee ☕](https://www.buymeacoffee.com/lesleyxyz)
+If you like my work, give this repository a `⭐` or consider [Buying Me A Coffee ☕](https://www.buymeacoffee.com/lesleydk)
 
 # Definitions
 **My Firewalla API**: https://my.firewalla.com A user friendly way to access your firewalla box through the browser
